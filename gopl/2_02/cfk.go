@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"lasyard/coding-go/gopl/2_01/tempconv"
 	"os"
 	"strconv"
+
+	tempconv "github.com/lasyard/coding-go/gopl/2_01"
 )
 
 func main() {
