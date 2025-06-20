@@ -9,6 +9,8 @@
 
 # But not these files...
 !.gitignore
+!.editorconfig
+!.gitattributes
 
 !*.go
 !go.sum
@@ -16,6 +18,10 @@
 
 !*.md
 !*.txt
+!*.json
+!*.yaml
+!Dockerfile
+!Makefile
 !LICENSE
 
 # !Makefile

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: run-go
+spec:
+  serviceAccountName: run-go
+  restartPolicy: OnFailure
+  containers:
+    - image: las3:443/coding-go/k8s/run-go:latest
+      imagePullPolicy: Always
+      name: run-go
+      resources:
+        requests:
+          cpu: "1"
+          memory: 100Mi
+        limits:
+          cpu: "1"
+          memory: 100Mi
