@@ -38,11 +38,10 @@ func main() {
 	}
 
 	// Create the ConfigMap in the "default" namespace
-	_, err = clientset.CoreV1().ConfigMaps("default").Create(context.Background(), cm, metav1.CreateOptions{})
+	result, err := clientset.CoreV1().ConfigMaps("default").Create(context.Background(), cm, metav1.CreateOptions{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating ConfigMap: %v\n", err)
 		os.Exit(1)
 	}
-
-	fmt.Println("ConfigMap created successfully!")
+	fmt.Printf("Created: %s\n", result.GetName())
 }

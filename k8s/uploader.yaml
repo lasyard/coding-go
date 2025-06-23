@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uploader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uploader
+  template:
+    metadata:
+      labels:
+        app: uploader
+    spec:
+      containers:
+        - name: uploader
+          image: las3:443/coding-go/k8s/run-go:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: upload-volume
+              mountPath: /app/uploads
+      volumes:
+        - name: upload-volume
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uploader
+spec:
+  selector:
+    app: uploader
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: uploader-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /upload
+            pathType: Prefix
+            backend:
+              service:
+                name: uploader
+                port:
+                  number: 80
