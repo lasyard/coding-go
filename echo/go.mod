@@ -1,4 +1,4 @@
-module echo-start
+module github.com/lasyard/coding-go/echo
 
 go 1.24.4
 
@@ -15,3 +15,5 @@ require (
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.25.0 // indirect
 )
+
+replace github.com/lasyard/coding-go/echo => .
