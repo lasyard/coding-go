@@ -15,16 +15,17 @@
 !*.go
 !go.sum
 !go.mod
+!buf.lock
 
 !*.md
 !*.txt
 !*.json
 !*.yaml
+!*.proto
 !Dockerfile
 !Makefile
 !LICENSE
 
-# !Makefile
-
 # ...even if they are in subdirectories
 !*/
+gen/
