@@ -11,6 +11,7 @@
 !.gitignore
 !.editorconfig
 !.gitattributes
+!.dockerignore
 
 !*.go
 !go.sum
@@ -28,4 +29,7 @@
 
 # ...even if they are in subdirectories
 !*/
+
+# But ignore these directories
 gen/
+vendor/

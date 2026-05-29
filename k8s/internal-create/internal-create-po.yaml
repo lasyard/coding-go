@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: run-go
+  name: internal-create
 spec:
-  serviceAccountName: run-go
+  serviceAccountName: internal-create
   restartPolicy: OnFailure
   containers:
-    - image: las3:443/coding-go/k8s/run-go:latest
-      imagePullPolicy: Always
-      name: run-go
+    - image: ghcr.io/lasyard/coding-go/k8s/internal-create:v1
+      imagePullPolicy: IfNotPresent
+      name: internal-create
       resources:
         requests:
           cpu: "1"

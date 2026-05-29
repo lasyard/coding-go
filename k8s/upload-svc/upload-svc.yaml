@@ -1,25 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: uploader
+  name: upload-svc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: uploader
+      app: upload-svc
   template:
     metadata:
       labels:
-        app: uploader
+        app: upload-svc
     spec:
       containers:
-        - name: uploader
-          image: las3:443/coding-go/k8s/run-go:latest
+        - name: upload-svc
+          image: ghcr.io/lasyard/coding-go/k8s/upload-svc:v1
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: upload-volume
-              mountPath: /app/uploads
+              mountPath: /var/uploads
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
       volumes:
         - name: upload-volume
           emptyDir: {}
@@ -27,10 +34,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: uploader
+  name: upload-svc
 spec:
   selector:
-    app: uploader
+    app: upload-svc
   ports:
     - protocol: TCP
       port: 80
@@ -39,7 +46,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: uploader-ingress
+  name: upload-svc-ingress
 spec:
   ingressClassName: nginx
   rules:
@@ -49,6 +56,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: uploader
+                name: upload-svc
                 port:
                   number: 80

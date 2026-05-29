@@ -52,5 +52,5 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Failed to create CRD: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Printf("Created: %s\n", result.GetName())
+	fmt.Printf("Created ConfigMap `%s` in `default` namespace.\n", result.GetName())
 }

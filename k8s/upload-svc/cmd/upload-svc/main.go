@@ -20,7 +20,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	uploadDir := "./uploads"
+	uploadDir := "/var/uploads"
 	os.MkdirAll(uploadDir, os.ModePerm)
 
 	dst, err := os.Create(filepath.Join(uploadDir, header.Filename))
